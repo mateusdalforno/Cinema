@@ -10,3 +10,6 @@ CREATE TABLE filme (
     sinopse varchar(500),
     categoria varchar(20)
 );
+
+
+
