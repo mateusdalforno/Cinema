@@ -1,6 +1,7 @@
 CREATE DATABASE cinema;
 USE cinema;
 
+
 CREATE TABLE filme (
     idFilme int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     titulo varchar(50),
