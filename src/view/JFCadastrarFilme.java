@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
+
 import model.bean.Filme;
 import model.dao.FilmeDAO;
 
@@ -20,6 +23,9 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class JFCadastrarFilme extends JFrame {
@@ -161,5 +167,22 @@ public class JFCadastrarFilme extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(269, 400, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		//formata a data
+		JDateChooser dtInicial = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
+		//inicia com a data atual
+		dtInicial.setDate(new Date());
+		//tamanho
+		dtInicial.setBounds(297, 23, 122, 20);
+		//seleciona todo o campo ao ganhar focus
+		dtInicial.getDateEditor().getUiComponent().addFocusListener(new FocusAdapter() {
+
+			public void focusGained(FocusEvent e) {
+		((JTextFieldDateEditor)e.getSource()).selectAll();
+		}
+		});
+		//adiciona o componente no painel
+		contentPane.add(dtInicial);
+
 	}
 }
