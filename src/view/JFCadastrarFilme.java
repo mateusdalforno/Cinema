@@ -54,7 +54,7 @@ public class JFCadastrarFilme extends JFrame {
 	 * Create the frame.
 	 */
 	public JFCadastrarFilme() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 595, 473);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -155,34 +155,34 @@ public class JFCadastrarFilme extends JFrame {
 					f.setDublado(false);
 				}
 				dao.create(f);
+				dispose();
 			}
 		});
 		btnCadastrar.setBounds(10, 400, 89, 23);
 		contentPane.add(btnCadastrar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtTitulo.setText(null);
+				txtSinopse.setText(null);
+				txtCategoria.setText(null);
+				spTempo.setValue(0);
+				imagem.clearSelection();
+				audio.clearSelection();
+			}
+		});
 		btnLimpar.setBounds(137, 400, 89, 23);
 		contentPane.add(btnLimpar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(269, 400, 89, 23);
 		contentPane.add(btnCancelar);
-		
-		//formata a data
-		JDateChooser dtInicial = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
-		//inicia com a data atual
-		dtInicial.setDate(new Date());
-		//tamanho
-		dtInicial.setBounds(297, 23, 122, 20);
-		//seleciona todo o campo ao ganhar focus
-		dtInicial.getDateEditor().getUiComponent().addFocusListener(new FocusAdapter() {
-
-			public void focusGained(FocusEvent e) {
-		((JTextFieldDateEditor)e.getSource()).selectAll();
-		}
-		});
-		//adiciona o componente no painel
-		contentPane.add(dtInicial);
 
 	}
 }
